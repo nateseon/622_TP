@@ -237,7 +237,10 @@ class RedBlackTree:
 
     def _add_nodes(self, dot, node):
         if node != self.TNULL:
-            dot.node(str(id(node)), f'{node.key} ({node.color})', style="filled", fillcolor=node.color)
+            # Set color for black and red nodes to ensure visibility
+            fillcolor = "black" if node.color == "black" else "red"
+            fontcolor = "white" if node.color == "black" else "black"
+            dot.node(str(id(node)), f'{node.key}', style="filled", fillcolor=fillcolor, fontcolor=fontcolor)
             if node.left != self.TNULL:
                 dot.edge(str(id(node)), str(id(node.left)))
                 self._add_nodes(dot, node.left)
